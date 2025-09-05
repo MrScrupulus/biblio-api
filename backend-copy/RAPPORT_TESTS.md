@@ -2,15 +2,15 @@
 
 ## Résumé Exécutif
 
-Ce rapport présente les résultats des tests unitaires effectués sur les trois entités principales du projet Biblio-API : `Book`, `Author`, et `Editor`. L'objectif était de valider le bon fonctionnement de chaque entité et de leurs relations dans un environnement isolé.
+Ce rapport présente les résultats complets des tests unitaires et d'intégration effectués sur les trois entités principales du projet Biblio-API : `Book`, `Author`, et `Editor`. L'objectif était de valider le bon fonctionnement de chaque entité, de leurs relations, et de la logique des repositories.
 
 ### Métriques Globales
 
-- **Total des tests** : 32
-- **Tests réussis** : 32 (100%)
+- **Total des tests** : 56 (32 unitaires + 24 intégration)
+- **Tests réussis** : 56 (100%)
 - **Tests échoués** : 0 (0%)
-- **Assertions** : 79
-- **Temps d'exécution** : 0.034 secondes
+- **Assertions** : 181
+- **Temps d'exécution** : 0.055 secondes
 - **Mémoire utilisée** : 12.00 MB
 
 ---
@@ -29,11 +29,16 @@ Ce rapport présente les résultats des tests unitaires effectués sur les trois
 
 ```
 tests/
-└── Unit/
-    └── Entity/
-        ├── BookTest.php
-        ├── AuthorTest.php
-        └── EditorTest.php
+├── Unit/
+│   └── Entity/
+│       ├── BookTest.php
+│       ├── AuthorTest.php
+│       └── EditorTest.php
+└── Integration/
+    └── Repository/
+        ├── BookRepositoryTest.php
+        ├── AuthorRepositoryTest.php
+        └── EditorRepositoryTest.php
 ```
 
 ---
@@ -78,6 +83,15 @@ tests/
 - ✅ **Gestion des Valeurs Nulles** : Support approprié des valeurs optionnelles
 - ✅ **Robustesse** : Tests avec caractères spéciaux et valeurs limites
 
+#### Tests d'Intégration BookRepository (7 tests)
+- ✅ **Recherche par titre** : Logique de filtrage et recherche textuelle
+- ✅ **Recherche par auteur** : Relations entre entités et filtrage
+- ✅ **Recherche par plage de pages** : Critères numériques et plages
+- ✅ **Tri par titre** : Algorithmes de tri alphabétique
+- ✅ **Recherche avec relations** : Jointures complexes entre entités
+- ✅ **Pagination** : Gestion des grandes collections de données
+- ✅ **Recherche avancée** : Critères multiples combinés
+
 ### 2.2 Entité Author (Auteur)
 
 #### Statistiques
@@ -104,6 +118,16 @@ tests/
 - ✅ **Relations Bidirectionnelles** : Mise à jour automatique des relations
 - ✅ **Fluent Interface** : Chaînage des méthodes pour une API intuitive
 
+#### Tests d'Intégration AuthorRepository (8 tests)
+- ✅ **Recherche par nom** : Filtrage par nom de famille
+- ✅ **Recherche par pays** : Groupement géographique des auteurs
+- ✅ **Recherche par nom complet** : Concaténation prénom + nom
+- ✅ **Tri par nom** : Algorithmes de tri alphabétique
+- ✅ **Recherche avec livres** : Relations complexes avec les livres
+- ✅ **Recherche par initiales** : Patterns spéciaux (J.R.R., J.K.)
+- ✅ **Recherche avancée** : Critères multiples (pays + nombre de livres)
+- ✅ **Pagination** : Gestion des collections d'auteurs
+
 ### 2.3 Entité Editor (Éditeur)
 
 #### Statistiques
@@ -129,6 +153,17 @@ tests/
 - ✅ **Gestion des Dates** : Support correct des objets DateTime
 - ✅ **Collection Management** : Gestion appropriée de la collection de livres
 - ✅ **Relations Bidirectionnelles** : Mise à jour automatique des relations
+
+#### Tests d'Intégration EditorRepository (9 tests)
+- ✅ **Recherche par nom** : Filtrage basique par nom d'éditeur
+- ✅ **Recherche par siège social** : Localisation géographique
+- ✅ **Recherche par date de création** : Critères temporels
+- ✅ **Tri par nom** : Algorithmes de tri alphabétique
+- ✅ **Recherche avec livres** : Relations complexes avec les livres
+- ✅ **Recherche par période** : Plages temporelles (siècles)
+- ✅ **Recherche avancée** : Critères multiples (pays + nombre de livres)
+- ✅ **Pagination** : Gestion des collections d'éditeurs
+- ✅ **Recherche par ancienneté** : Calculs temporels (plus de 100 ans)
 
 ---
 
@@ -262,7 +297,7 @@ $book->setTitle('Mon Livre')
 
 ### Résultat Global
 
-**✅ SUCCÈS COMPLET** - Tous les tests unitaires passent avec succès.
+**✅ SUCCÈS COMPLET** - Tous les tests unitaires et d'intégration passent avec succès.
 
 ### Qualité du Code
 
@@ -275,14 +310,14 @@ Les entités du projet Biblio-API démontrent une excellente qualité de code av
 
 ### Fiabilité
 
-Avec 32 tests réussis et 79 assertions validées, le code des entités est considéré comme fiable et prêt pour la production.
+Avec 56 tests réussis (32 unitaires + 24 intégration) et 181 assertions validées, le code des entités et repositories est considéré comme fiable et prêt pour la production.
 
 ### Prochaines Étapes Recommandées
 
-1. **Tests d'Intégration** : Tester les repositories avec une base de données
-2. **Tests Fonctionnels** : Valider l'API REST complète
-3. **Tests de Performance** : Évaluer les performances avec de gros volumes de données
-4. **Tests de Sécurité** : Valider la sécurité des endpoints API
+1. **Tests Fonctionnels** : Valider l'API REST complète avec base de données
+2. **Tests de Performance** : Évaluer les performances avec de gros volumes de données
+3. **Tests de Sécurité** : Valider la sécurité des endpoints API
+4. **Tests End-to-End** : Tests complets du workflow utilisateur
 
 ---
 
@@ -291,14 +326,20 @@ Avec 32 tests réussis et 79 assertions validées, le code des entités est cons
 ### 8.1 Commandes de Test
 
 ```bash
-# Exécuter tous les tests unitaires
+# Exécuter tous les tests (unitaires + intégration)
+vendor/bin/phpunit --testdox
+
+# Exécuter seulement les tests unitaires
 vendor/bin/phpunit tests/Unit/Entity/ --testdox
+
+# Exécuter seulement les tests d'intégration
+vendor/bin/phpunit tests/Integration/ --testdox
 
 # Exécuter un test spécifique
 vendor/bin/phpunit tests/Unit/Entity/BookTest.php --testdox
 
 # Exécuter avec couverture de code
-vendor/bin/phpunit tests/Unit/Entity/ --coverage-html coverage/
+vendor/bin/phpunit --coverage-html coverage/
 ```
 
 ### 8.2 Configuration PHPUnit
@@ -312,9 +353,9 @@ Le fichier `phpunit.dist.xml` configure :
 
 ### 8.3 Métriques de Performance
 
-- **Temps d'exécution moyen** : 0.034 secondes
+- **Temps d'exécution moyen** : 0.055 secondes
 - **Mémoire utilisée** : 12.00 MB
-- **Tests par seconde** : ~941 tests/seconde
+- **Tests par seconde** : ~1018 tests/seconde
 
 ---
 
