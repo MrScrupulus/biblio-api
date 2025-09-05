@@ -600,4 +600,4 @@ Ce guide couvre la démarche complète pour implémenter des tests dans le proje
 
 ---
 
-*Guide créé le 5 septembre 2025 - Projet Biblio-API*
+*Guide créé par MrScrupulus le 5 septembre 2025 - Projet Biblio-API*

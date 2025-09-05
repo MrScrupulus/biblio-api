@@ -84,6 +84,7 @@ tests/
 - ✅ **Robustesse** : Tests avec caractères spéciaux et valeurs limites
 
 #### Tests d'Intégration BookRepository (7 tests)
+
 - ✅ **Recherche par titre** : Logique de filtrage et recherche textuelle
 - ✅ **Recherche par auteur** : Relations entre entités et filtrage
 - ✅ **Recherche par plage de pages** : Critères numériques et plages
@@ -119,6 +120,7 @@ tests/
 - ✅ **Fluent Interface** : Chaînage des méthodes pour une API intuitive
 
 #### Tests d'Intégration AuthorRepository (8 tests)
+
 - ✅ **Recherche par nom** : Filtrage par nom de famille
 - ✅ **Recherche par pays** : Groupement géographique des auteurs
 - ✅ **Recherche par nom complet** : Concaténation prénom + nom
@@ -155,6 +157,7 @@ tests/
 - ✅ **Relations Bidirectionnelles** : Mise à jour automatique des relations
 
 #### Tests d'Intégration EditorRepository (9 tests)
+
 - ✅ **Recherche par nom** : Filtrage basique par nom d'éditeur
 - ✅ **Recherche par siège social** : Localisation géographique
 - ✅ **Recherche par date de création** : Critères temporels

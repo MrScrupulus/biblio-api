@@ -42,8 +42,8 @@ class AuthorRepositoryTest extends TestCase
         // Simuler la logique de recherche par nom
         $authors = [$author1, $author2];
         $searchLastName = 'Asimov';
-        
-        $filteredAuthors = array_filter($authors, function($author) use ($searchLastName) {
+
+        $filteredAuthors = array_filter($authors, function ($author) use ($searchLastName) {
             return $author->getLastName() === $searchLastName;
         });
 
@@ -68,7 +68,7 @@ class AuthorRepositoryTest extends TestCase
 
         // Simuler la recherche par pays
         $searchCountry = 'Royaume-Uni';
-        $filteredAuthors = array_filter($authors, function($author) use ($searchCountry) {
+        $filteredAuthors = array_filter($authors, function ($author) use ($searchCountry) {
             return $author->getCountry() === $searchCountry;
         });
 
@@ -93,7 +93,7 @@ class AuthorRepositoryTest extends TestCase
 
         // Simuler la recherche par nom complet
         $searchFullName = 'Isaac Asimov';
-        $filteredAuthors = array_filter($authors, function($author) use ($searchFullName) {
+        $filteredAuthors = array_filter($authors, function ($author) use ($searchFullName) {
             $fullName = $author->getFirstName() . ' ' . $author->getLastName();
             return $fullName === $searchFullName;
         });
@@ -118,7 +118,7 @@ class AuthorRepositoryTest extends TestCase
         ];
 
         // Simuler le tri par nom de famille
-        usort($authors, function($a, $b) {
+        usort($authors, function ($a, $b) {
             return strcmp($a->getLastName(), $b->getLastName());
         });
 
@@ -183,7 +183,7 @@ class AuthorRepositoryTest extends TestCase
 
         // Simuler la recherche par initiales (J.R.R.)
         $searchInitials = 'J.R.R.';
-        $filteredAuthors = array_filter($authors, function($author) use ($searchInitials) {
+        $filteredAuthors = array_filter($authors, function ($author) use ($searchInitials) {
             return $author->getFirstName() === $searchInitials;
         });
 
@@ -240,7 +240,7 @@ class AuthorRepositoryTest extends TestCase
         $authors = [$author1, $author2, $author3];
 
         // Recherche avancée : auteurs du Royaume-Uni avec au moins 1 livre
-        $filteredAuthors = array_filter($authors, function($author) {
+        $filteredAuthors = array_filter($authors, function ($author) {
             return $author->getCountry() === 'Royaume-Uni' && $author->getBook()->count() >= 1;
         });
 

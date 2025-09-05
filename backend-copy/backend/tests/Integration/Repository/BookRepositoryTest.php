@@ -45,8 +45,8 @@ class BookRepositoryTest extends TestCase
         // Simuler la logique de recherche par titre
         $books = [$book1, $book2];
         $searchTitle = 'Seigneur';
-        
-        $filteredBooks = array_filter($books, function($book) use ($searchTitle) {
+
+        $filteredBooks = array_filter($books, function ($book) use ($searchTitle) {
             return stripos($book->getTitle(), $searchTitle) !== false;
         });
 
@@ -83,7 +83,7 @@ class BookRepositoryTest extends TestCase
 
         // Simuler la logique de recherche par auteur
         $books = [$book1, $book2];
-        $filteredBooks = array_filter($books, function($book) use ($author) {
+        $filteredBooks = array_filter($books, function ($book) use ($author) {
             return $book->getAuthor() === $author;
         });
 
@@ -113,8 +113,8 @@ class BookRepositoryTest extends TestCase
         // Simuler la recherche par plage de pages (200-400)
         $minPages = 200;
         $maxPages = 400;
-        
-        $filteredBooks = array_filter($books, function($book) use ($minPages, $maxPages) {
+
+        $filteredBooks = array_filter($books, function ($book) use ($minPages, $maxPages) {
             $pages = $book->getPages();
             return $pages >= $minPages && $pages <= $maxPages;
         });
@@ -154,7 +154,7 @@ class BookRepositoryTest extends TestCase
         $books = [$book1, $book2, $book3];
 
         // Simuler le tri par titre
-        usort($books, function($a, $b) {
+        usort($books, function ($a, $b) {
             return strcmp($a->getTitle(), $b->getTitle());
         });
 
@@ -256,7 +256,7 @@ class BookRepositoryTest extends TestCase
         ];
 
         // Recherche avancée : livres de Tolkien avec plus de 300 pages
-        $filteredBooks = array_filter($books, function($book) {
+        $filteredBooks = array_filter($books, function ($book) {
             return $book->getAuthor()->getLastName() === 'Tolkien' && $book->getPages() > 300;
         });
 
